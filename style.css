@@ -3,3 +3,33 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+.row{
+    width: 100%;
+    padding: 0 30px;
+}
+.card{
+    width: 100%;
+    background-color: rgb(37, 46, 56);
+    padding: 20px 30px;
+    border-radius: 4px;
+}
+.card-body{
+    margin: 20px 0;
+}
+.q-option{
+    padding: 5px;
+    border-radius: 4px;
+}
+.q-option:hover{
+    background-color: rgb(54, 67, 82);
+}
+.btn button{
+    width: 100%;
+    padding: 10px 0;
+}
