@@ -18,6 +18,7 @@ body{
     background-color: rgb(37, 46, 56);
     padding: 20px 30px;
     border-radius: 4px;
+    margin: auto;
 }
 .card-body{
     margin: 20px 0;
@@ -32,4 +33,24 @@ body{
 .btn button{
     width: 100%;
     padding: 10px 0;
+}
+
+.result{
+    display: none; /* display none until quiz is finished */
+    background-color: rgb(63, 144, 236);
+    padding: 12px 36px;
+    margin: auto;
+    border-radius: 4px;
+    text-align: center;
+}
+
+@media only screen and (min-width: 480px) {
+    .card{
+        width: 80%;
+    }
+}
+@media only screen and (min-width: 720px) {
+    .card{
+        width: 50%;
+    }
 }

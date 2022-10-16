@@ -55,30 +55,75 @@ const quizData = [
 const card         = document.querySelector(".card");
 const cardHeading  = card.querySelector(".card-heading");
 const cardBody     = card.querySelector(".card-body");
+const submitBtn    = card.querySelector(".btn-submit");
+const result       = document.querySelector(".result");
 
-let current = 0;
+// global variables
+let currentQuestion = 0;
 
 // to display questions one by one
-const showQuestion = () => {
+const renderQuestion = () => {
 
     // display the question
-    cardHeading.innerHTML = quizData[current].question;
+    cardHeading.innerHTML = quizData[currentQuestion].question;
 
     // option number count
     let optNum = 1;
 
+    // remove the current options before rendering next one
+    while(cardBody.firstChild)
+        cardBody.removeChild(cardBody.firstChild);
+
     // display the options
-    quizData[current].options.forEach(opt => {
+    quizData[currentQuestion].options.forEach( opt => {
 
         // create a new element for each option
-        let qOption = document.createElement("div");
-        qOption.className = "q-option";
-        qOption.innerHTML = `<input type="radio" class="q-check" name="option" id="opt${optNum}">
+        let qOption        = document.createElement("div");
+        qOption.className  = "q-option";
+        qOption.innerHTML  = `<input type="radio" class="q-check" name="option" value="${optNum}" id="opt${optNum}">
                              <label for="opt${optNum}">${opt}</label>`;
         cardBody.appendChild(qOption);
         
         optNum++;
     });
+    currentQuestion++;
 }
 
-showQuestion();
+const startQuiz = () => {
+
+    // display the first question
+    renderQuestion();
+
+    let numOfCorrectAns = 0;
+
+    submitBtn.addEventListener("click", (e) => {
+
+        // prevent form submission
+        e.preventDefault();
+        
+        // get the selected option element
+        const checkedOption = document.querySelector("input[name='option']:checked");
+
+        // ask if no option is selected
+        if(checkedOption == null){
+            alert("Please select an option.");
+            return;
+        }
+
+        // evaluate whether the option selected is correct or not and count
+        if(checkedOption.value == quizData[currentQuestion-1].correct)
+            numOfCorrectAns++;
+
+        // check if we reached end
+        if(currentQuestion == quizData.length){
+            card.style.display    = "none";
+            result.style.display  = "block";
+            result.innerHTML      = `You have answered correctly ${numOfCorrectAns}/${quizData.length}`;
+            return;
+        }
+
+        renderQuestion(); // render next question
+    });
+}
+
+startQuiz();
