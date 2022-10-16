@@ -4,6 +4,8 @@
     box-sizing: border-box;
 }
 body{
+    height: 100vh;
+    background-color: rgb(65, 62, 216);
     color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
@@ -13,7 +15,14 @@ body{
     width: 100%;
     padding: 0 30px;
 }
+
+.app-name{
+    text-align: center;
+    padding: 24px 0;
+}
+
 .card{
+    display: none; /* intially hidden */
     width: 100%;
     background-color: rgb(37, 46, 56);
     padding: 20px 30px;
@@ -24,29 +33,77 @@ body{
     margin: 20px 0;
 }
 .q-option{
+    margin: 1px 0;
     padding: 5px;
     border-radius: 4px;
+    cursor: pointer;
 }
 .q-option:hover{
     background-color: rgb(54, 67, 82);
 }
-.btn button{
+.btn .btn-submit{
     width: 100%;
     padding: 10px 0;
+    cursor: pointer;
 }
 
 .result{
     display: none; /* display none until quiz is finished */
-    background-color: rgb(63, 144, 236);
+    background-color: rgb(37, 46, 56);
     padding: 12px 36px;
     margin: auto;
     border-radius: 4px;
     text-align: center;
 }
 
+.start-quiz{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    line-height: 150px; /* same as height */
+    text-align: center;
+    background-color: rgb(37, 46, 56);
+    color: rgb(65, 62, 216);
+    font-weight: bold;
+    font-size: 24px;
+    border-radius: 50%;
+    margin: 12px auto;
+    cursor: pointer;
+}
+.restart-quiz{
+    display: block;
+    background-color: rgb(65, 62, 216);
+    padding: 5px 15px;
+    margin: 5px 0;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+}
+.copyright-msg{
+    font-size: 12px;
+    text-align: center;
+    color: rgb(139, 162, 201);
+}
+
 @media only screen and (min-width: 480px) {
     .card{
         width: 80%;
+    }
+    .copyright-msg{
+        font-size: 16px;
+    }
+    .restart-quiz{
+        display: inline;
     }
 }
 @media only screen and (min-width: 720px) {

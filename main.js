@@ -57,6 +57,14 @@ const cardHeading  = card.querySelector(".card-heading");
 const cardBody     = card.querySelector(".card-body");
 const submitBtn    = card.querySelector(".btn-submit");
 const result       = document.querySelector(".result");
+const startQuizBtn = document.querySelector(".start-quiz");
+
+// start quiz
+startQuizBtn.addEventListener("click", (e) => {
+    card.style.display = "block";
+    startQuizBtn.style.display = "none";
+    startQuiz();
+});
 
 // global variables
 let currentQuestion = 0;
@@ -110,20 +118,35 @@ const startQuiz = () => {
             return;
         }
 
-        // evaluate whether the option selected is correct or not and count
-        if(checkedOption.value == quizData[currentQuestion-1].correct)
+        // evaluate whether the option selected is correct or not and then count and mark
+        if(checkedOption.value == quizData[currentQuestion-1].correct){
             numOfCorrectAns++;
+            checkedOption.parentElement.style.backgroundColor = "#2ac84a";
+        } else {
+            checkedOption.parentElement.style.backgroundColor = "#d94646";
+            document.getElementsByClassName("q-option")[(quizData[currentQuestion-1].correct)-1].style.backgroundColor = "#2ac84a";
+        }
 
         // check if we reached end
         if(currentQuestion == quizData.length){
-            card.style.display    = "none";
-            result.style.display  = "block";
-            result.innerHTML      = `You have answered correctly ${numOfCorrectAns}/${quizData.length}`;
+            const timeOutID = setTimeout(() => {
+                card.style.display    = "none";
+                result.style.display  = "block";
+                result.innerHTML      = `You have answered correctly ${numOfCorrectAns}/${quizData.length}
+                                         <span onclick="location.reload()" class="restart-quiz">Restart</span>`;
+                clearTimeout(timeOutID);
+            }, 2000);
             return;
         }
 
-        renderQuestion(); // render next question
+        // disable the submit button until next question is rendered
+        e.target.disabled = true;
+
+        // render next question after 2 sec (2 sec for showing users the correct or wrong answer)
+        const timeOutID = setTimeout(() => {
+            renderQuestion();
+            e.target.disabled = false;
+            clearTimeout(timeOutID);
+        }, 2000);
     });
 }
-
-startQuiz();
