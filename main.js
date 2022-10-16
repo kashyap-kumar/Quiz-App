@@ -10,7 +10,7 @@ const quizData = [
         correct: 2
     },
     {
-        question: "Choose the default file extension from the following.",
+        question: "Choose the default file extension for PHP from the following.",
         options: [
             ".xml",
             ".html",
